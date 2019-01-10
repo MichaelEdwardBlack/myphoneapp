@@ -54,14 +54,12 @@
 						"in": "body",
 						"description": "The phone book entry to be added",
 						"schema": {
-							"items": {
 								"$ref": "#/definitions/phoneBookEntryBase"
-							}
 						}
 					}
 				],
 				"responses": {
-					"200": {
+					"201": {
 						"description": "Successfully added",
 						"schema": {
 							"$ref": "#/definitions/phoneBookEntry"
