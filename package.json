@@ -1,0 +1,17 @@
+{
+  "name": "michael-black-myphoneapp",
+  "version": "0.1.0",
+  "description": "my phone app web service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Black",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@byu-oit/byuapi": "0.0.13"
+  },
+  "devDependencies": {
+    "request": "^2.88.0"
+  }
+}
