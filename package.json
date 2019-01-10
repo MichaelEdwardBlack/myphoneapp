@@ -9,7 +9,8 @@
   "author": "Michael Black",
   "license": "Apache-2.0",
   "dependencies": {
-    "@byu-oit/byuapi": "0.0.13"
+    "@byu-oit/byuapi": "0.0.13",
+    "express": "^4.16.4"
   },
   "devDependencies": {
     "request": "^2.88.0"

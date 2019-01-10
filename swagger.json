@@ -1,0 +1,198 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "0.1.0",
+		"title": "<michael-black-phonebook>"
+	},
+	"basePath": "/",
+	"schemes": [
+		"http"
+	],
+	"consumes": [
+		"application/json"
+	],
+	"produces": [
+		"application/json"
+	],
+	"paths": {
+		"/phonebook": {
+			"x-controller": "myphoneapp",
+			"get": {
+				"description": "Returns all phonebook entries to the caller",
+				"operationId": "getPhoneBook",
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"schema": {
+							"title": "ArrayOfPhoneBookEntries",
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/phoneBookEntry"
+							}
+						}
+					},
+					"400": {
+						"description": "Error in request",
+						"schema": {
+							"type": "string"
+						}
+					},
+					"500": {
+						"description": "An error occured in the server",
+						"schema": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"post": {
+				"description": "Adds a phonebook entry",
+				"operationId": "addPhoneBookEntry",
+				"parameters": [
+					{
+						"name": "phoneEntry",
+						"in": "body",
+						"description": "The phone book entry to be added",
+						"schema": {
+								"$ref": "#/definitions/phoneBookEntryBase"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Successfully added",
+						"schema": {
+							"$ref": "#/definitions/phoneBookEntry"
+						}
+					},
+					"400": {
+						"description": "Error in request",
+						"schema": {
+							"type": "string"
+						}
+					},
+					"500": {
+						"description": "An error occured on the server",
+						"schema": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		},
+		"/phonebook/{entryId}": {
+			"x-controller": "myphoneapp",
+			"put": {
+				"description": "Modifies an existing phone book entry",
+				"operationId": "updatePhoneBookEntry",
+				"parameters": [
+					{
+						"name": "entryId",
+						"in": "path",
+						"description": "The id of the phone book entry to be modified",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "modifiedPhoneBookEntry",
+						"in": "body",
+						"description": "the modified phone book entry to be updated",
+						"schema": {
+							"$ref": "#/definitions/phoneBookEntryBase"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successfully added",
+						"schema": {
+							"$ref": "#/definitions/phoneBookEntry"
+						}
+					},
+					"400": {
+						"description": "Error in request",
+						"schema": {
+							"type": "string"
+						}
+					},
+					"500": {
+						"description": "An error occured on the server",
+						"schema": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"delete": {
+				"description": "Deletes the specified phone book entry",
+				"operationId": "deletePhoneBookEntry",
+				"parameters": [
+					{
+						"name": "entryId",
+						"in": "path",
+						"description": "The id of the phone book entry to be modified",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Successfully deleted"
+					},
+					"400": {
+						"description": "Error in request",
+						"schema": {
+							"type": "string"
+						}
+					},
+					"500": {
+						"description": "An error occured on the server",
+						"schema": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"phoneBookEntryBase": {
+			"required": [
+				"firstName",
+				"lastName",
+				"phoneNumber"
+			],
+			"properties": {
+				"firstName": {
+					"type": "string"
+				},
+				"lastName": {
+					"type": "string"
+				},
+				"phoneNumber": {
+					"type": "string"
+				},
+				"phoneType": {
+					"type": "string"
+				}
+			}
+		},
+		"phoneBookEntry": {
+			"allOf": [
+				{
+					"$ref": "#/definitions/phoneBookEntryBase"
+				},
+				{
+					"required": [
+						"entryId"
+					],
+					"properties": {
+						"entryId": {
+							"type": "string"
+						}
+					}
+				}
+			]
+		}
+	}
+}
