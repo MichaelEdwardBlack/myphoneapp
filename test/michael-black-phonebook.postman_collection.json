@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "11b28b2c-6faa-4975-9f9e-33f3e057d7d9",
+		"name": "<michael-black-phonebook>",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "phonebook",
+			"item": [
+				{
+					"name": "",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6f5e3a09-1948-469b-853a-5e9bd006b222",
+								"exec": [
+									"tests[\"Status code is 201\"] = responseCode.code === 201;",
+									"",
+									"var data = JSON.parse(responseBody);",
+									"tests[\"entryId is present\"] = data.hasOwnProperty(\"entryId\");",
+									"tests[\"firstName = 'Tom'\"] = data.firstName === \"Tom\";",
+									"tests[\"lastName = 'Test'\"] = data.lastName === \"Test\";",
+									"tests[\"phoneNumber = '8014201234'\"] = data.phoneNumber === \"8014201234\";",
+									"tests[\"phoneType = 'cell'\"] = data.phoneType === \"cell\";"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"Tom\",\n\t\"lastName\": \"Test\",\n\t\"phoneNumber\": \"8014201234\",\n\t\"phoneType\": \"cell\"\n}\n"
+						},
+						"url": {
+							"raw": "http://{{baseurl}}/phonebook",
+							"protocol": "http",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"phonebook"
+							]
+						},
+						"description": "Adds a phonebook entry"
+					},
+					"response": []
+				},
+				{
+					"name": "",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http:///phonebook",
+							"host": [
+								"http:"
+							],
+							"port": "",
+							"path": [
+								"",
+								"",
+								"phonebook"
+							]
+						},
+						"description": "Returns all phonebook entries to the caller"
+					},
+					"response": []
+				},
+				{
+					"name": "",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "the modified phone book entry to be updated"
+						},
+						"url": {
+							"raw": "http:///phonebook/:entryId",
+							"host": [
+								"http:"
+							],
+							"port": "",
+							"path": [
+								"",
+								"",
+								"phonebook",
+								":entryId"
+							],
+							"variable": [
+								{
+									"key": "entryId",
+									"value": "{{entryId}}"
+								}
+							]
+						},
+						"description": "Modifies an existing phone book entry"
+					},
+					"response": []
+				},
+				{
+					"name": "",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{baseurl}}/phonebook/:entryId",
+							"protocol": "http",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"phonebook",
+								":entryId"
+							],
+							"variable": [
+								{
+									"key": "entryId",
+									"value": "{{entryId}}"
+								}
+							]
+						},
+						"description": "Deletes the specified phone book entry"
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for phonebook"
+		}
+	]
+}

@@ -4,7 +4,9 @@
   "description": "my phone app web service",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test:newman": "newman run ./test/michael-black-phonebook.postman_collection.json -e ./test/localhost.postman_environment.json",
+    "test:integration": "npm-run-all -p -r -l start test:newman"
   },
   "author": "Michael Black",
   "license": "Apache-2.0",
@@ -13,6 +15,11 @@
     "express": "^4.16.4"
   },
   "devDependencies": {
+    "newman": "^4.3.1",
+    "npm-run-all": "^4.1.5",
     "request": "^2.88.0"
+  },
+  "config": {
+    "port": "9072"
   }
 }
